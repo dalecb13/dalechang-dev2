@@ -19,6 +19,9 @@ const C3 = '#0f380f'; // darkest
 
 const TILE = 16;
 
+// Pause-menu options, top to bottom. Only "Close" reacts to the action button.
+const MENU_ITEMS = ['Inventory', '2024', 'Close'];
+
 // Tile legend:
 //   ~ water   . sand   , grass   = path   T tree (sits on grass)
 const MAP = [
@@ -83,6 +86,10 @@ export default function ZeldaMap() {
     let toTileX = tileX;
     let toTileY = tileY;
     let legPhase = 0; // flips each step so the legs alternate
+
+    // ---- pause-menu state ----
+    let menuOpen = false;
+    let menuIndex = 0; // which MENU_ITEMS row the cursor is on
 
     let last = performance.now();
     let raf = 0;
@@ -244,6 +251,45 @@ export default function ZeldaMap() {
       }
     }
 
+    function drawMenu(t: number) {
+      const lineH = 16;
+      const padX = 18; // leaves room for the cursor arrow
+      const padY = 9;
+      const boxW = 104;
+      const boxH = padY * 2 + MENU_ITEMS.length * lineH;
+      const boxX = Math.floor((CANVAS_W - boxW) / 2);
+      const boxY = 28;
+
+      // double frame: dark outer border, light panel, thin dark inner line
+      ctx!.fillStyle = C3;
+      ctx!.fillRect(boxX - 3, boxY - 3, boxW + 6, boxH + 6);
+      ctx!.fillStyle = C0;
+      ctx!.fillRect(boxX, boxY, boxW, boxH);
+      ctx!.strokeStyle = C3;
+      ctx!.lineWidth = 1;
+      ctx!.strokeRect(boxX + 1.5, boxY + 1.5, boxW - 3, boxH - 3);
+
+      ctx!.font = '10px "Courier New", monospace';
+      ctx!.textBaseline = 'middle';
+      // Blink the cursor on a ~0.5s cycle so it reads as "active".
+      const cursorVisible = Math.floor(t * 2) % 2 === 0;
+
+      for (let i = 0; i < MENU_ITEMS.length; i++) {
+        const ty = boxY + padY + i * lineH + lineH / 2;
+        ctx!.fillStyle = C3;
+        ctx!.fillText(MENU_ITEMS[i], boxX + padX, ty);
+        if (i === menuIndex && cursorVisible) {
+          const cx = boxX + 8;
+          ctx!.beginPath();
+          ctx!.moveTo(cx, ty - 4);
+          ctx!.lineTo(cx + 5, ty);
+          ctx!.lineTo(cx, ty + 4);
+          ctx!.closePath();
+          ctx!.fill();
+        }
+      }
+    }
+
     function render(t: number) {
       for (let r = 0; r < MAP_H; r++) {
         for (let c = 0; c < MAP_W; c++) {
@@ -278,6 +324,8 @@ export default function ZeldaMap() {
         py = tileY * TILE;
       }
       drawChar(px, py, facing, moving ? legPhase : 0);
+
+      if (menuOpen) drawMenu(t);
     }
 
     function frameLoop(now: number) {
@@ -335,9 +383,38 @@ export default function ZeldaMap() {
     };
 
     function onKeyDown(e: KeyboardEvent) {
+      // Spacebar is the action button. Always swallow it so the page never
+      // scrolls; on the "Close" row it dismisses the menu, otherwise no-op.
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        if (menuOpen && MENU_ITEMS[menuIndex] === 'Close') menuOpen = false;
+        return;
+      }
+
+      // Enter opens the menu (with the cursor reset to the first item).
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!menuOpen) {
+          menuOpen = true;
+          menuIndex = 0;
+          held.length = 0; // drop any held direction so the hero stops walking
+        }
+        return;
+      }
+
       const dir = KEY_MAP[e.key];
       if (!dir) return;
       e.preventDefault();
+
+      // While the menu is open, up/down move the cursor (wrapping around);
+      // left/right are ignored and the hero doesn't walk.
+      if (menuOpen) {
+        if (e.repeat) return;
+        if (dir === 'down') menuIndex = (menuIndex + 1) % MENU_ITEMS.length;
+        else if (dir === 'up') menuIndex = (menuIndex - 1 + MENU_ITEMS.length) % MENU_ITEMS.length;
+        return;
+      }
+
       if (e.repeat) return; // OS key-repeat is ignored; the loop handles stepping
       if (!held.includes(dir)) held.push(dir);
     }
