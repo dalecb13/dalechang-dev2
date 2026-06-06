@@ -391,6 +391,15 @@ export default function ZeldaMap() {
         return;
       }
 
+      // Escape always closes the menu, regardless of the cursor position.
+      if (e.key === 'Escape') {
+        if (menuOpen) {
+          e.preventDefault();
+          menuOpen = false;
+        }
+        return;
+      }
+
       // Enter opens the menu (with the cursor reset to the first item).
       if (e.key === 'Enter') {
         e.preventDefault();
