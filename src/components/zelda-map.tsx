@@ -66,36 +66,35 @@ export default function ZeldaMap() {
     ctx.imageSmoothingEnabled = false;
 
     // --- mutable game state (kept out of React to avoid re-renders) ---
-    const keys = new Set<string>();
-    let posX = 8 * TILE; // top-left of the character's 16x16 cell
-    let posY = 7 * TILE;
+    // Movement is locked to the grid: every step moves the character exactly
+    // one tile. `held` tracks pressed directions in order so the most recently
+    // pressed key wins, and holding a key keeps stepping tile-by-tile.
+    const held: Array<'up' | 'down' | 'left' | 'right'> = [];
+    let tileX = 8;
+    let tileY = 7;
     let facing: Facing = 'down';
-    let moveTime = 0; // accumulates while walking, drives the step animation
+
+    let moving = false;
+    let progress = 0; // 0..1 across the current tile step
+    let fromPX = tileX * TILE;
+    let fromPY = tileY * TILE;
+    let toPX = fromPX;
+    let toPY = fromPY;
+    let toTileX = tileX;
+    let toTileY = tileY;
+    let legPhase = 0; // flips each step so the legs alternate
+
     let last = performance.now();
     let raf = 0;
 
-    const SPEED = 64; // pixels per second
-    const DIAG = Math.SQRT1_2;
+    const STEP_TIME = 0.16; // seconds to cross one tile
 
-    // The character's feet are the only thing that collides with the world.
-    function collides(x: number, y: number) {
-      const hx = x + 3;
-      const hy = y + 10;
-      const hw = 10;
-      const hh = 5;
-      const corners = [
-        [hx, hy],
-        [hx + hw - 1, hy],
-        [hx, hy + hh - 1],
-        [hx + hw - 1, hy + hh - 1],
-      ];
-      for (const [cx, cy] of corners) {
-        if (isBlockedChar(tileChar(Math.floor(cx / TILE), Math.floor(cy / TILE)))) {
-          return true;
-        }
-      }
-      return false;
-    }
+    const DELTA: Record<'up' | 'down' | 'left' | 'right', [number, number]> = {
+      up: [0, -1],
+      down: [0, 1],
+      left: [-1, 0],
+      right: [1, 0],
+    };
 
     // ---- tile painters (all draw within a 16x16 cell at x,y) ----
     function drawWater(x: number, y: number, t: number) {
@@ -269,46 +268,51 @@ export default function ZeldaMap() {
         }
       }
 
-      const walking =
-        keys.has('up') || keys.has('down') || keys.has('left') || keys.has('right');
-      const frame = walking ? Math.floor(moveTime / 0.15) % 2 : 0;
-      drawChar(posX, posY, facing, frame);
+      let px: number;
+      let py: number;
+      if (moving) {
+        px = fromPX + (toPX - fromPX) * progress;
+        py = fromPY + (toPY - fromPY) * progress;
+      } else {
+        px = tileX * TILE;
+        py = tileY * TILE;
+      }
+      drawChar(px, py, facing, moving ? legPhase : 0);
     }
 
     function frameLoop(now: number) {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
 
-      let dx = 0;
-      let dy = 0;
-      if (keys.has('left')) dx -= 1;
-      if (keys.has('right')) dx += 1;
-      if (keys.has('up')) dy -= 1;
-      if (keys.has('down')) dy += 1;
-
-      if (dx !== 0 || dy !== 0) {
-        moveTime += dt;
-        if (dx !== 0 && dy !== 0) {
-          dx *= DIAG;
-          dy *= DIAG;
+      if (moving) {
+        progress += dt / STEP_TIME;
+        if (progress >= 1) {
+          progress = 0;
+          moving = false;
+          tileX = toTileX;
+          tileY = toTileY;
         }
-        // face the dominant axis of travel
-        if (Math.abs(dx) > Math.abs(dy)) {
-          facing = dx < 0 ? 'left' : 'right';
-        } else {
-          facing = dy < 0 ? 'up' : 'down';
+      }
+
+      // Only accept new input once the character is settled on a tile, so
+      // motion always starts and ends aligned to the grid.
+      if (!moving && held.length > 0) {
+        const dir = held[held.length - 1];
+        facing = dir;
+        const [dx, dy] = DELTA[dir];
+        const ntx = tileX + dx;
+        const nty = tileY + dy;
+        if (!isBlockedChar(tileChar(ntx, nty))) {
+          fromPX = tileX * TILE;
+          fromPY = tileY * TILE;
+          toPX = ntx * TILE;
+          toPY = nty * TILE;
+          toTileX = ntx;
+          toTileY = nty;
+          progress = 0;
+          moving = true;
+          legPhase ^= 1;
         }
-
-        const step = SPEED * dt;
-        const nx = posX + dx * step;
-        if (!collides(nx, posY)) posX = nx;
-        const ny = posY + dy * step;
-        if (!collides(posX, ny)) posY = ny;
-
-        posX = Math.max(0, Math.min(CANVAS_W - TILE, posX));
-        posY = Math.max(0, Math.min(CANVAS_H - TILE, posY));
-      } else {
-        moveTime = 0;
       }
 
       render(now / 1000);
@@ -334,12 +338,14 @@ export default function ZeldaMap() {
       const dir = KEY_MAP[e.key];
       if (!dir) return;
       e.preventDefault();
-      keys.add(dir);
+      if (e.repeat) return; // OS key-repeat is ignored; the loop handles stepping
+      if (!held.includes(dir)) held.push(dir);
     }
     function onKeyUp(e: KeyboardEvent) {
       const dir = KEY_MAP[e.key];
       if (!dir) return;
-      keys.delete(dir);
+      const i = held.indexOf(dir);
+      if (i !== -1) held.splice(i, 1);
     }
 
     window.addEventListener('keydown', onKeyDown);
