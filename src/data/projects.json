@@ -1,0 +1,34 @@
+[
+  {
+    "projectName": "Kiki's Scavenger Hunt",
+    "projectLink": "https://github.com/eloquia/kikis-adventure",
+    "startYear": 2024,
+    "isCompleted": true,
+    "notableTechnologies": [
+      { "displayText": "TypeScript", "href": "https://www.typescriptlang.org/" },
+      { "displayText": "Phaser 3", "href": "https://phaser.io/" },
+      { "displayText": "CapacitorJS", "href": "https://capacitorjs.com/" },
+      { "displayText": "iOS", "href": "https://www.apple.com/ios/" }
+    ],
+    "description": "Developed a visual novel game in 6 weeks using Phaser 3 and various LLM prompting techniques.",
+    "imageKey": "kikis-scavenger-hunt",
+    "projectImageAlt": "Screenshot of Kiki's Scavenger Hunt game",
+    "projectImageType": "mobile"
+  },
+  {
+    "projectName": "MIND Lab",
+    "projectLink": "http://mindlab.cs.umd.edu/",
+    "startYear": 2020,
+    "isCompleted": false,
+    "notableTechnologies": [
+      { "displayText": "Java", "href": "https://www.java.com/en/" },
+      { "displayText": "Spring", "href": "https://spring.io/" },
+      { "displayText": "Spark", "href": "https://spark.apache.org/" },
+      { "displayText": "Hadoop", "href": "https://hadoop.apache.org/" }
+    ],
+    "description": "Manage and mentor undergraduate interns on fundamentals of full-stack development and also CI/CD.",
+    "imageKey": "mindlab-website",
+    "projectImageType": "desktop",
+    "projectImageAlt": "Screenshot of MIND Lab website"
+  }
+]
