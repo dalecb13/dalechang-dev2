@@ -1,78 +1,223 @@
 [
-  {
-    "companyName": "SAIC, Koverse",
-    "companyLink": "https://www.saic.com/",
-    "jobTitle": "Sr Software Engineer",
-    "startYear": 2023,
-    "endYear": 2024,
-    "notableTechnologies": [
-      { "displayText": "React", "href": "https://react.dev/" },
-      { "displayText": "TypeScript", "href": "https://www.typescriptlang.org/" },
-      { "displayText": "Java", "href": "https://www.java.com/en/" },
-      { "displayText": "Spring", "href": "https://spring.io/" },
-      { "displayText": "Docker", "href": "https://www.docker.com/" },
-      { "displayText": "Kubernetes", "href": "https://kubernetes.io/" },
-      { "displayText": "Azure", "href": "https://azure.microsoft.com/" },
-      { "displayText": "Helm", "href": "https://helm.sh/" }
-    ],
-    "description": "Build, research, and test experimental solutions for DARPA."
-  },
-  {
-    "companyName": "Innovim",
-    "companyLink": "https://innovim.com/",
-    "jobTitle": "Tech Lead",
-    "otherTitles": ["Sr Software Engineer"],
-    "startYear": 2022,
-    "endYear": 2023,
-    "notableTechnologies": [
-      { "displayText": "React", "href": "https://react.dev/" },
-      { "displayText": "TypeScript", "href": "https://www.typescriptlang.org/" },
-      { "displayText": "GitLab", "href": "https://about.gitlab.com/" }
-    ],
-    "description": "Built and maintained UX-tracking software to understand and improve how airmen use technology. Eventually lead this team within a few months of joining to fill the lead/PM role."
-  },
-  {
-    "companyName": "Cigna",
-    "companyLink": "https://www.cigna.com/",
-    "jobTitle": "Sr Software Engineer",
-    "startYear": 2019,
-    "endYear": 2022,
-    "notableTechnologies": [
-      { "displayText": "Angular", "href": "" },
-      { "displayText": "TypeScript", "href": "https://www.typescriptlang.org/" },
-      { "displayText": "Java", "href": "https://www.java.com/en/" },
-      { "displayText": "Spring", "href": "https://spring.io/" },
-      { "displayText": "Docker", "href": "https://www.docker.com/" },
-      { "displayText": "AWS", "href": "https://aws.amazon.com/" }
-    ],
-    "description": "Lead, designed, and engineered internal financial reporting applications and workflows. Additionally I also frequently lead complex software upgrade deployments."
-  },
-  {
-    "companyName": "Leidos",
-    "companyLink": "https://www.leidos.com/",
-    "jobTitle": "Data Integration Engineer",
-    "startYear": 2018,
-    "endYear": 2019,
-    "notableTechnologies": [
-      { "displayText": "JavaScript", "href": "" },
-      { "displayText": "Java", "href": "https://www.java.com/en/" },
-      { "displayText": "Spark", "href": "https://spark.apache.org/" },
-      { "displayText": "Hadoop", "href": "https://hadoop.apache.org/" }
-    ],
-    "description": "Developed CAADS, a data science platform that enabled government agencies to manage and analyze their data. Also I prototyped and presented a variety of best-of-breed solutions for capturing new lines of business."
-  },
-  {
-    "companyName": "Leidos",
-    "companyLink": "https://www.leidos.com/",
-    "jobTitle": "Text Analytics & Software Analyst",
-    "startYear": 2016,
-    "endYear": 2018,
-    "notableTechnologies": [
-      { "displayText": "Java", "href": "https://www.java.com/en/" },
-      { "displayText": "Spring", "href": "https://spring.io/" },
-      { "displayText": "Spark", "href": "https://spark.apache.org/" },
-      { "displayText": "Hadoop", "href": "https://hadoop.apache.org/" }
-    ],
-    "description": "Designed and developed features for COBRA, an e-discovery platform for underfunded government agencies to help with civil litigation."
-  }
+    {
+        "companyName": "Minnow Collective",
+        "companyLink": "https://www.minnowcollective.com/",
+        "jobTitle": "Senior Full-Stack Software Engineer",
+        "startYear": 2026,
+        "endYear": 2026,
+        "notableTechnologies": [
+            {
+                "displayText": "NextJS",
+                "href": "https://nextjs.org/"
+            },
+            {
+                "displayText": "TypeScript",
+                "href": "https://www.typescriptlang.org/"
+            },
+            {
+                "displayText": "Python",
+                "href": "https://www.python.org/"
+            },
+            {
+                "displayText": "FastAPI",
+                "href": "https://fastapi.tiangolo.com/"
+            },
+            {
+                "displayText": "Docker",
+                "href": "https://www.docker.com/"
+            },
+            {
+                "displayText": "Kubernetes",
+                "href": "https://kubernetes.io/"
+            },
+            {
+                "displayText": "GCP",
+                "href": "https://cloud.google.com/"
+            }
+        ],
+        "description": "Built and maintained a biodiversity and climate change impact assessment tool for Minnow Collective."
+    },
+    {
+        "companyName": "Freelance",
+        "companyLink": "",
+        "jobTitle": "Senior Full-Stack Software Engineer",
+        "startYear": 2026,
+        "endYear": 2024,
+        "notableTechnologies": [
+            {
+                "displayText": "NextJS",
+                "href": "https://nextjs.org/"
+            },
+            {
+                "displayText": "TypeScript",
+                "href": "https://www.typescriptlang.org/"
+            },
+            {
+                "displayText": "Python",
+                "href": "https://www.python.org/"
+            },
+            {
+                "displayText": "FastAPI",
+                "href": "https://fastapi.tiangolo.com/"
+            },
+            {
+                "displayText": "Vercel",
+                "href": "https://vercel.com/"
+            }
+        ],
+        "description": "Freelance work for a variety of clients."
+    },
+    {
+        "companyName": "SAIC, Koverse",
+        "companyLink": "https://www.saic.com/",
+        "jobTitle": "Sr Software Engineer",
+        "startYear": 2023,
+        "endYear": 2024,
+        "notableTechnologies": [
+            {
+                "displayText": "React",
+                "href": "https://react.dev/"
+            },
+            {
+                "displayText": "TypeScript",
+                "href": "https://www.typescriptlang.org/"
+            },
+            {
+                "displayText": "Java",
+                "href": "https://www.java.com/en/"
+            },
+            {
+                "displayText": "Spring",
+                "href": "https://spring.io/"
+            },
+            {
+                "displayText": "Docker",
+                "href": "https://www.docker.com/"
+            },
+            {
+                "displayText": "Kubernetes",
+                "href": "https://kubernetes.io/"
+            },
+            {
+                "displayText": "Azure",
+                "href": "https://azure.microsoft.com/"
+            },
+            {
+                "displayText": "Helm",
+                "href": "https://helm.sh/"
+            }
+        ],
+        "description": "Build, research, and test experimental solutions for DARPA."
+    },
+    {
+        "companyName": "Innovim",
+        "companyLink": "https://innovim.com/",
+        "jobTitle": "Tech Lead",
+        "otherTitles": [
+            "Sr Software Engineer"
+        ],
+        "startYear": 2022,
+        "endYear": 2023,
+        "notableTechnologies": [
+            {
+                "displayText": "React",
+                "href": "https://react.dev/"
+            },
+            {
+                "displayText": "TypeScript",
+                "href": "https://www.typescriptlang.org/"
+            },
+            {
+                "displayText": "GitLab",
+                "href": "https://about.gitlab.com/"
+            }
+        ],
+        "description": "Built and maintained UX-tracking software to understand and improve how airmen use technology. Eventually lead this team within a few months of joining to fill the lead/PM role."
+    },
+    {
+        "companyName": "Cigna",
+        "companyLink": "https://www.cigna.com/",
+        "jobTitle": "Sr Software Engineer",
+        "startYear": 2019,
+        "endYear": 2022,
+        "notableTechnologies": [
+            {
+                "displayText": "Angular",
+                "href": ""
+            },
+            {
+                "displayText": "TypeScript",
+                "href": "https://www.typescriptlang.org/"
+            },
+            {
+                "displayText": "Java",
+                "href": "https://www.java.com/en/"
+            },
+            {
+                "displayText": "Spring",
+                "href": "https://spring.io/"
+            },
+            {
+                "displayText": "Docker",
+                "href": "https://www.docker.com/"
+            },
+            {
+                "displayText": "AWS",
+                "href": "https://aws.amazon.com/"
+            }
+        ],
+        "description": "Lead, designed, and engineered internal financial reporting applications and workflows. Additionally I also frequently lead complex software upgrade deployments."
+    },
+    {
+        "companyName": "Leidos",
+        "companyLink": "https://www.leidos.com/",
+        "jobTitle": "Data Integration Engineer",
+        "startYear": 2018,
+        "endYear": 2019,
+        "notableTechnologies": [
+            {
+                "displayText": "JavaScript",
+                "href": ""
+            },
+            {
+                "displayText": "Java",
+                "href": "https://www.java.com/en/"
+            },
+            {
+                "displayText": "Spark",
+                "href": "https://spark.apache.org/"
+            },
+            {
+                "displayText": "Hadoop",
+                "href": "https://hadoop.apache.org/"
+            }
+        ],
+        "description": "Developed CAADS, a data science platform that enabled government agencies to manage and analyze their data. Also I prototyped and presented a variety of best-of-breed solutions for capturing new lines of business."
+    },
+    {
+        "companyName": "Leidos",
+        "companyLink": "https://www.leidos.com/",
+        "jobTitle": "Text Analytics & Software Analyst",
+        "startYear": 2016,
+        "endYear": 2018,
+        "notableTechnologies": [
+            {
+                "displayText": "Java",
+                "href": "https://www.java.com/en/"
+            },
+            {
+                "displayText": "Spring",
+                "href": "https://spring.io/"
+            },
+            {
+                "displayText": "Spark",
+                "href": "https://spark.apache.org/"
+            },
+            {
+                "displayText": "Hadoop",
+                "href": "https://hadoop.apache.org/"
+            }
+        ],
+        "description": "Designed and developed features for COBRA, an e-discovery platform for underfunded government agencies to help with civil litigation."
+    }
 ]
