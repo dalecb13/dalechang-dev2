@@ -41,8 +41,8 @@
         "companyName": "Freelance",
         "companyLink": "",
         "jobTitle": "Senior Full-Stack Software Engineer",
-        "startYear": 2026,
-        "endYear": 2024,
+        "startYear": 2024,
+        "endYear": 2026,
         "notableTechnologies": [
             {
                 "displayText": "NextJS",
