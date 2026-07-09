@@ -14,7 +14,19 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: { // for climate-focused
+          cream: '#F0EAD2',      // page background
+          creamAlt: '#DDE5B6',   // card/section background
+          ash: '#6C584C',        // primary text
+          teal: '#5B8E7D',       // primary accent
+          tealHover: '#4a7364',  // accent hover
+          copper: '#A98467',     // secondary accent, used sparingly
+        },
       fontFamily: {
+        // For climate-focused 
+        // display: ['"Space Grotesk"', 'sans-serif'],
+        // body: ['Inter', 'sans-serif'],
+        // mono: ['"IBM Plex Mono"', 'monospace'],
         sans: ['var(--font-roboto)'],
         mono: ['var(--font-roboto-mono)'],
       },
