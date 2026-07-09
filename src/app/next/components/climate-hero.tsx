@@ -1,31 +1,47 @@
+import Image from 'next/image'
+import profilePic from '../../../images/dale-chang-photo.jpeg';
+
+const profileImageStyle = {
+    borderRadius: '50%',
+    border: '1px solid #F1F5F9',
+}
 
 export default function ClimateHero() {
     return (
-        <div>
-            <section className="hero">
-                <div className="hero__content">
-                    <p className="hero__eyebrow">Open to climate tech roles</p>
-                    <h1 className="hero__headline">Senior full-stack software engineer building scalable UIs and APIs for the energy transition.</h1>
-                    <div className="hero__actions">
-                    <a href="mailto:dale@dalechang.dev" className="btn btn--primary">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
-                        Email me
-                    </a>
-                    <a href="/resume.pdf" download className="btn btn--secondary">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
-                        Download resume
-                    </a>
-                    </div>
+        <section className="flex flex-col max-w-6xl mx-auto px-6 md:px-12 py-16 md:py-28">
+            <div className="flex flex-col-reverse md:flex md:gap-4">
+                <Image
+                    src={profilePic}
+                    width={200}
+                    height={200}
+                    alt="Picture of Dale Chang"
+                    style={profileImageStyle}
+                    className="mb-8 mt-4 place-self-center"
+                />
+                <div className="flex flex-col gap-2 md:max-w-96">
+                    <h1 className="text-[1.75rem] font-medium">Dale Chang</h1>
+                    <h2 className="text-[1.3rem] font-normal">
+                        Senior full-stack software engineer building scalable UIs and APIs for the energy transition.
+                    </h2>
                 </div>
-
-                <div className="hero__signature" aria-hidden="true">
-                    <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-                    <path className="signature-path" d="M0,80 C15,30 30,130 45,55 C60,15 75,145 90,65 C105,25 120,115 135,72 C150,45 165,95 180,78 C195,60 205,85 215,80 C230,78 250,80 270,80 L400,80" />
-                    <circle className="signature-dot" cx="380" cy="80" r="4.5" />
+            </div>
+                
+            <div className="flex flex-wrap gap-3.5 md:justify-center">
+                <a href="mailto:dale@dalechang.dev"
+                    className="inline-flex items-center gap-2 font-semibold text-[0.95rem] px-4 py-2 rounded-md bg-teal text-cream border border-teal hover:bg-tealHover hover:border-tealHover transition-colors">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" className="w-4 h-4 shrink-0">
+                    <path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/>
                     </svg>
-                    <span className="hero__signature-label">System load — stabilized</span>
-                </div>
-            </section>
-        </div>
+                    Email me
+                </a>
+                <a href="/resume.pdf" download
+                    className="inline-flex items-center gap-2 font-semibold text-[0.95rem] px-4 py-2 rounded-md bg-transparent text-ash border border-ash/40 hover:bg-creamAlt hover:border-ash transition-colors">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" className="w-4 h-4 shrink-0">
+                    <path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/>
+                    </svg>
+                    Download resume
+                </a>
+            </div>
+        </section>
     )
 }

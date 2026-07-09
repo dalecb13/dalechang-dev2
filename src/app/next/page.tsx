@@ -2,9 +2,8 @@ import ClimateHero from "./components/climate-hero";
 
 export default function Next() {
     return (
-        <>
-            <h1>TBD</h1>
+        <div className="bg-cream text-ash font-body m-0 w-full">
             <ClimateHero />
-        </>
+        </div>
     )
 }
